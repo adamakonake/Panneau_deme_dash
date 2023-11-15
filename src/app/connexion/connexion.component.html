@@ -1,0 +1,44 @@
+<div class="logoDiv">
+    <img class="logo" src="../../assets/logo_deme.png" alt="" srcset="">
+    <div class="titre">
+        <p>PANNEAU</p>
+        <p>DEME</p>
+    </div>
+</div>
+
+<main>
+    <div class="bodySection">
+        <p class="leftText">Connectez-vous</p>
+        <div class="container">
+            <div class="titreText">
+                <p>PANNE</p>
+                <p>
+                    AU <br>
+                    DEME
+                </p>
+            </div>
+            <form class="myForm" [formGroup]="formLogin" >
+                <div class="champ_input">
+                    <input [ngStyle]="{'border': submitted && f['email'].errors ? '1px solid red' : null}" type="email"  class="input_focus" id="email" placeholder="" formControlName="email">
+                    <label for="email" class="label">Email</label>
+                </div>
+                <div *ngIf="submitted && f['email'].errors" class="errorDiv">
+                    <span *ngIf="submitted && f['email'].errors!['required']">Email requit</span>
+                    <span *ngIf="submitted && f['email'].errors!['email']">Email non valid</span>
+                    <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrectt</span>
+                </div>
+                <div class="champ_input">
+                    <input [ngStyle]="{'border': submitted && f['password'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="motDePasse" placeholder="" formControlName="password" >
+                    <label for="motDePasse" class="label">Mot de passe</label>
+                </div>
+                <div *ngIf="submitted && f['password'].errors" class="errorDiv">
+                    <span *ngIf="f['password'].errors!['minlength']">Mot de passe inferieur à six(6)</span>
+                    <span *ngIf="f['password'].errors!['required']">Mot de passe requit</span>
+                    <span *ngIf="submitted && f['password'].errors!['incorrect']">Mot de passe incorrectt</span>
+                </div>
+                <p class="forgotText" (click)="gotToForgotPage()">Mot de passe oublié ?</p>
+                <input class="btnLogin" type="button" (click)="onSubmit()" value="Connexion" >
+            </form>
+        </div>
+    </div>
+</main>

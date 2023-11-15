@@ -1,0 +1,49 @@
+<main>
+    <header>
+        <div class="logoDiv">
+            <img class="logo" src="../../assets/logo_deme.png" alt="" srcset="">
+            <div class="titre">
+                <p>PANNEAU</p>
+                <p>DEME</p>
+            </div>
+        </div>
+        <div class="headerRightSection">
+            <div class="divProfil">
+                <div class="adminPhoto"></div>
+                <p class="adminNom">Adama Konake</p>
+            </div>
+            <div class="divLogOut">
+                <img class="logOutIcon" src="../../assets/log_out_icon.png" alt="" srcset="">
+            </div>
+        </div>
+    </header>
+    <div class="body">
+        <div id="sideBarre" class="sideBarreHide">
+            <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(1)">
+                <p>Accueil</p>
+            </div>
+            <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(2)">
+                <p>Equipements</p>
+            </div>
+            <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(3)">
+                <p>Type</p>
+            </div>
+            <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(4)">
+                <p>Electriciens</p>
+            </div>
+            <div [ngClass]="index == 5 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(5)">
+                <p>Administrateurs</p>
+            </div>
+            <div [ngClass]="index == 6 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(6)">
+                <p>Utilisateurs</p>
+            </div>
+            <img class="logSideBarre" src="../../assets/logo_deme.png" alt="" srcset="">
+            <div id="menuIconDiv">
+                <img id="iconNext" src="../../assets/next_icon.png" alt="" srcset="">
+            </div>
+        </div>
+        <div class="tests">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</main>

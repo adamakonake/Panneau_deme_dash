@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: poppins;
+    src: url("assets/poppins/Poppins-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: poppins-bold;
+    src: url("assets/poppins/Poppins-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: poppins-enmBold;
+    src: url("assets/poppins/Poppins-SemiBold.otf") format("opentype");
+}
+
+body {
+    font-family: 'poppins', 'arial', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
