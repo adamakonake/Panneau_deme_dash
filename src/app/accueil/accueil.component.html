@@ -10,7 +10,7 @@
         <div class="headerRightSection">
             <div class="divProfil">
                 <div class="adminPhoto"></div>
-                <p class="adminNom">Adama Konake</p>
+                <p class="adminNom">{{admin ? admin.prenom : "ted"}} {{admin ? admin.nom : "rt"}}</p>
             </div>
             <div class="divLogOut">
                 <img class="logOutIcon" src="../../assets/log_out_icon.png" alt="" srcset="">
@@ -19,13 +19,13 @@
     </header>
     <div class="body">
         <div id="sideBarre" class="sideBarreHide">
-            <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(1)">
+            <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="goToAccueil(1)">
                 <p>Accueil</p>
             </div>
             <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(2)">
                 <p>Equipements</p>
             </div>
-            <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(3)">
+            <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="goToType(3)">
                 <p>Type</p>
             </div>
             <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(4)">

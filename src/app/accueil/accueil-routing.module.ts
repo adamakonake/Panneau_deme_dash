@@ -15,6 +15,10 @@ const routes: Routes = [
     {
       path : 'welcome-page',
       loadChildren : () => import("./welcome-page/welcome-page.module").then(m => m.WelcomePageModule)
+    },
+    {
+      path : 'app-typ-equipement',
+      loadChildren : () => import("./typ-equipement/typ-equipement.module").then(m => m.TypEquipementModule)
     }
   ]
 }

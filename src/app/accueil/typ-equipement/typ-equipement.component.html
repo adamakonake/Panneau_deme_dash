@@ -1,0 +1,36 @@
+<main>
+    <div class="searchBarDiv">
+        <div class="searchInputAndIconDiv">
+            <div class="searchIconDiv">
+                <img class="searchIcon" src="../../../assets/search_icon.png" alt="" srcset="">
+            </div>
+            <input class="searchInput" type="text" placeholder="Recherche" >
+        </div>
+    </div>
+    <div class="listAndFormDiv">
+        <p *ngIf="types.length == 0" >Aucun type trouvé</p>
+        <div class="listType" *ngIf="types.length > 0">
+            <div class="typeItem" *ngFor="let type of types">
+                <p class="titreType">{{type.titre}}</p>
+                <div class="actionsDiv">
+                    <img src="../../../assets/editIcon.png" alt="" srcset="">
+                    <img src="../../../assets/deleteIcon.png" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+        <form class="formType" [formGroup]="typForm" (ngSubmit)="onSubmit()">
+            <div>
+                <div class="champ_input">
+                    <input [ngStyle]="{'border': submitted && f['titre'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="titre" placeholder="" formControlName="titre">
+                    <label for="titre" class="label">Titre</label>
+                </div>
+                <div *ngIf="submitted && f['titre'].errors" class="errorDiv">
+                    <span *ngIf="submitted && f['titre'].errors!['required']">Titre requit</span>
+                    <span *ngIf="f['titre'].errors!['minlength']">Titre inferieur à trois(3)</span>
+                    <span *ngIf="submitted && f['titre'].errors!['incorrect']">Ce type existe déjà</span>
+                </div>
+            </div>
+            <input class="btnSubmit" type="submit" value="Ajouter">
+        </form>
+    </div>
+</main>

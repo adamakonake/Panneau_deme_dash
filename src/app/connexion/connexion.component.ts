@@ -4,6 +4,12 @@ import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
 import { Admin } from '../model/admin';
 import { HttpClient } from '@angular/common/http';
+import { EncryptStorage } from 'encrypt-storage';
+
+
+export const encryptStorage = new EncryptStorage('secret-key-value',{
+  storageType: 'sessionStorage',
+});
 
 @Component({
   selector: 'app-connexion',
@@ -36,10 +42,13 @@ export class ConnexionComponent {
       return;
     }
     
-    this.http.post(`http://localhost:8080/admin/connect`, { "email": this.formLogin.value["email"], "password": this.formLogin.value["password"] }).subscribe((result : any) => {
-      this.adminService.connectAdmin = Object.assign(new Admin(),result["data"]);
-      console.log(this.adminService.connectAdmin);
-      this.gotToForgotPage();
+    this.adminService.connectAdmin(this.formLogin.value["email"]!,this.formLogin.value["password"]!).subscribe((result : any) => {
+      //this.adminService.currentAdmin = Object.assign(new Admin(),result["data"]);
+      //sessionStorage.setItem("currentAdmin",JSON.stringify(result["data"]));
+      encryptStorage.setItem('currentAdmin', encryptStorage.encryptValue(result["data"]) );
+      encryptStorage.setItem('isLogin',true);
+      this.adminService.isLogin = true;
+      this.route.navigate(['accueil']);
     },((error) => {
       console.log(error.error.message);
       if(error.error.message == "pass invalid"){

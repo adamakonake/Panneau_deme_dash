@@ -87,6 +87,7 @@ header {
     padding-top: 70px;
     background-color: white;
     transition: 0.3s all;
+    z-index: 10;
 
 }
 #iconNext{
@@ -135,7 +136,6 @@ header {
 }
 
 .tests{
-    margin: auto;
     width: 100%;
     height: fit-content;
 }
