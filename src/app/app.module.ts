@@ -14,6 +14,10 @@ import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AccueilModule } from './accueil/accueil.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TypeDialogComponent } from './composants/type-dialog/type-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EquipementDialogComponent } from './composants/equipement-dialog/equipement-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { AccueilModule } from './accueil/accueil.module';
     ValidationMailPageComponent,
     ResetPageComponent,
     AccueilComponent,
+    TypeDialogComponent,
+    EquipementDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,9 @@ import { AccueilModule } from './accueil/accueil.module';
     ResetPageModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AccueilModule
+    AccueilModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -43,7 +43,7 @@ export class WelcomePageComponent {
   }
 
   goToType(){
-    this.route.navigate(['accueil/app-typ-equipement']);
+    this.route.navigate(['accueil/typ-equipement']);
   }
 
 }

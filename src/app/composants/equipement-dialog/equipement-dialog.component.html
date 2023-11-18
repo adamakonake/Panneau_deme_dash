@@ -1,0 +1,73 @@
+<!----------------------------------------- Dialogue de confirmation de suppression ------------------------------------->
+
+<main *ngIf="data.action == 'supp'">
+    <p class="message">Voulez-vous vraiment supprimer<br>équipement ?<br>{{data.equipement.nom}}</p>
+    <div class="btnGroupe" >
+        <input class="ok" type="button" value="Oui" (click) = "supprimer()" >
+        <input class="no" type="button" value="Non" (click) = "closeDialog()" >
+    </div>
+</main>
+
+<!----------------------------------------- Formulaire d'ajout et de modificatio ------------------------------------->
+
+<form *ngIf="data.action != 'supp'" class="equipementForm" [formGroup]="formEquipement" (ngSubmit)="onSubmit()" >
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['nom'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="nom" placeholder="" formControlName="nom">
+        <label for="nom" class="label">Nom</label>
+    </div>
+    <div *ngIf="submitted && f['nom'].errors" class="errorDiv">
+        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requit</span>
+        <span *ngIf="submitted && f['nom'].errors!['minlength']">Nom inférieur à quatre(4) caractères</span>
+        <span *ngIf="submitted && f['nom'].errors!['incorrect']">Nom existe déjà</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['marque'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="marque" placeholder="" formControlName="marque">
+        <label for="marque" class="label">Marque</label>
+    </div>
+    <div *ngIf="submitted && f['marque'].errors" class="errorDiv">
+        <span *ngIf="submitted && f['marque'].errors!['required']">Email requit</span>
+        <span *ngIf="submitted && f['marque'].errors!['minlength']">Marque inférieur à quatre(4) caractères</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['puissance'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="puissance" placeholder="" formControlName="puissance" >
+        <label for="puissance" class="label">Puissance</label>
+    </div>
+    <div *ngIf="submitted && f['puissance'].errors" class="errorDiv">
+        <span *ngIf="f['puissance'].errors!['minlength']">Puissance est inferieur à 0</span>
+        <span *ngIf="f['puissance'].errors!['required']">Puissance requit</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['tension'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="tension" placeholder="" formControlName="tension" >
+        <label for="tension" class="label">Tension</label>
+    </div>
+    <div *ngIf="submitted && f['tension'].errors" class="errorDiv">
+        <span *ngIf="f['tension'].errors!['minlength']">Tension est inferieur à 0</span>
+        <span *ngIf="f['tension'].errors!['required']">Tension requit</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['intensite'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="intensite" placeholder="" formControlName="intensite" >
+        <label for="intensite" class="label">Intensite</label>
+    </div>
+    <div *ngIf="submitted && f['intensite'].errors" class="errorDiv">
+        <span *ngIf="f['intensite'].errors!['minlength']">Intensite est inferieur à 0</span>
+        <span *ngIf="f['intensite'].errors!['required']">Intensite requit</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['prix'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="prix" placeholder="" formControlName="prix" >
+        <label for="prix" class="label">Prix</label>
+    </div>
+    <div *ngIf="submitted && f['prix'].errors" class="errorDiv">
+        <span *ngIf="f['prix'].errors!['minlength']">Prix est inferieur à 0</span>
+        <span *ngIf="f['prix'].errors!['required']">Prix requit</span>
+    </div>
+    <div class="slectType" *ngIf="types.length > 0">
+        <label class="typeLabel" for="type">Type : </label>
+        <select [ngStyle]="{'border': submitted && f['type'].errors ? '1px solid red' : null}" name="type" id="type" formControlName="type">
+            <option *ngFor="let type of types ; let i = index" [value]="type.idTypeEquipement">{{type.titre}}</option>
+        </select>
+    </div>
+    <div class="btnGroup">
+        <input class="btnAjouter" type="submit" [value]="data.action == 'ajout' ? 'Ajouter' : 'Modifier'" >
+        <input class="btnAnnuler" type="button"  value="Annuler" (click)="closeDialog()">
+    </div>
+</form>

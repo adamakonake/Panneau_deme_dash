@@ -22,13 +22,13 @@
             <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="goToAccueil(1)">
                 <p>Accueil</p>
             </div>
-            <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(2)">
+            <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="goToEquipement(2)">
                 <p>Equipements</p>
             </div>
             <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="goToType(3)">
                 <p>Type</p>
             </div>
-            <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(4)">
+            <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="goToElectricien(4)">
                 <p>Electriciens</p>
             </div>
             <div [ngClass]="index == 5 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(5)">

@@ -17,8 +17,16 @@ const routes: Routes = [
       loadChildren : () => import("./welcome-page/welcome-page.module").then(m => m.WelcomePageModule)
     },
     {
-      path : 'app-typ-equipement',
+      path : 'typ-equipement',
       loadChildren : () => import("./typ-equipement/typ-equipement.module").then(m => m.TypEquipementModule)
+    },
+    {
+      path : 'equipement',
+      loadChildren : () => import("./equipement/equipement.module").then(m => m.EquipementModule)
+    },
+    {
+      path : 'electricien',
+      loadChildren : () => import("./electricien/electricien.module").then(m => m.ElectricienModule)
     }
   ]
 }

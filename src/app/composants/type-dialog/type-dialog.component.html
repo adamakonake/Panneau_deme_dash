@@ -1,0 +1,7 @@
+<main>
+    <p class="message">Voulez-vous vraiment supprimer<br> cet type d'équipement ?<br>{{data.titre}}</p>
+    <div class="btnGroupe" >
+        <input class="ok" type="button" value="Oui" [mat-dialog-close]="data.idType" >
+        <input class="no" type="button" value="Non" (click) = "closeDialog()" >
+    </div>
+</main>

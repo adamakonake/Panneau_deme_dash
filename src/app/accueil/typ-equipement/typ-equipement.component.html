@@ -4,24 +4,24 @@
             <div class="searchIconDiv">
                 <img class="searchIcon" src="../../../assets/search_icon.png" alt="" srcset="">
             </div>
-            <input class="searchInput" type="text" placeholder="Recherche" >
+            <input class="searchInput" type="text" placeholder="Recherche" [(ngModel)]="searchValue" (keyup)="search()" >
         </div>
     </div>
     <div class="listAndFormDiv">
         <p *ngIf="types.length == 0" >Aucun type trouvé</p>
         <div class="listType" *ngIf="types.length > 0">
-            <div class="typeItem" *ngFor="let type of types">
+            <div class="typeItem" *ngFor="let type of searchResult">
                 <p class="titreType">{{type.titre}}</p>
                 <div class="actionsDiv">
-                    <img src="../../../assets/editIcon.png" alt="" srcset="">
-                    <img src="../../../assets/deleteIcon.png" alt="" srcset="">
+                    <img src="../../../assets/editIcon.png" alt="" srcset="" (click)="changeEdiType(type)">
+                    <img src="../../../assets/deleteIcon.png" alt="" (click)="openDialog(type)">
                 </div>
             </div>
         </div>
         <form class="formType" [formGroup]="typForm" (ngSubmit)="onSubmit()">
             <div>
                 <div class="champ_input">
-                    <input [ngStyle]="{'border': submitted && f['titre'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="titre" placeholder="" formControlName="titre">
+                    <input [ngStyle]="{'border': submitted && f['titre'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="titre" placeholder="" formControlName="titre" >
                     <label for="titre" class="label">Titre</label>
                 </div>
                 <div *ngIf="submitted && f['titre'].errors" class="errorDiv">
@@ -30,7 +30,13 @@
                     <span *ngIf="submitted && f['titre'].errors!['incorrect']">Ce type existe déjà</span>
                 </div>
             </div>
-            <input class="btnSubmit" type="submit" value="Ajouter">
+            <div>
+                <input *ngIf="!isEdit" class="btnSubmit" type="submit" value="Ajouter">
+                <div class="formModif" *ngIf="isEdit">
+                    <input class="btnModif" type="submit" value="Modifier" >
+                    <input class="btnCancel" type="button" value="Annuler" (click)="cancelEdit()">
+                </div>
+            </div>
         </form>
     </div>
 </main>

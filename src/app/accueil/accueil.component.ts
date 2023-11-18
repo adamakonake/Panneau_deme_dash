@@ -74,7 +74,17 @@ export class AccueilComponent implements OnInit, OnDestroy {
 
   goToType(index : number){
     this.changeIndex(index);
-    this.route.navigate(['accueil/app-typ-equipement']);
+    this.route.navigate(['accueil/typ-equipement']);
+  }
+
+  goToEquipement(index : number){
+    this.changeIndex(index);
+    this.route.navigate(['accueil/equipement']);
+  }
+
+  goToElectricien(index : number){
+    this.changeIndex(index);
+    this.route.navigate(['accueil/electricien']);
   }
 
   ngOnDestroy(): void {

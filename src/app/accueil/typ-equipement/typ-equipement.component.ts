@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { TypeEquipement } from 'src/app/model/type-equipement';
 import { TypeEquipementService } from 'src/app/services/type-equipement.service';
+import {MatDialog} from '@angular/material/dialog';
+import { TypeDialogComponent } from 'src/app/composants/type-dialog/type-dialog.component';
 
 @Component({
   selector: 'app-typ-equipement',
@@ -11,6 +13,8 @@ import { TypeEquipementService } from 'src/app/services/type-equipement.service'
 export class TypEquipementComponent implements OnInit {
 
   types : TypeEquipement[] = [];
+  searchResult : TypeEquipement[] = [];
+  searchValue : string = "";
 
   typForm = this.formBuilder.group({
     titre : ['',[Validators.required,Validators.minLength(3)]]
@@ -18,7 +22,11 @@ export class TypEquipementComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private formBuilder : FormBuilder, private typeEquipmentService : TypeEquipementService){}
+  isEdit = false;
+
+  editType = new TypeEquipement();
+
+  constructor(private formBuilder : FormBuilder, private typeEquipmentService : TypeEquipementService,public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.allTypes();
@@ -35,22 +43,74 @@ export class TypEquipementComponent implements OnInit {
       return;
     }
 
-    this.typeEquipmentService.addType(this.typForm.value["titre"]!).subscribe((result : any) => {
-      console.log(Object.assign(new TypeEquipement(),result["data"]!))
-      this.allTypes();
-    },((error) => {
-      console.log(error.error.message);
-      if(error.error.message == "exist"){
-        this.typForm.controls["titre"].setErrors({'incorrect' : true});
-      }
-    }))
+    if(this.isEdit){
+      this.editType.titre = this.typForm.value["titre"]!;
+      this.typeEquipmentService.updateType(this.editType).subscribe((result)=>{
+        this.allTypes();
+        //this.typForm.get("titre")!.clearValidators();
+        this.submitted = false;
+        this.typForm.reset();
+        this.editType = new TypeEquipement();
+        this.isEdit = false;
+        this.typForm.controls["titre"].markAsTouched();
+      },(error)=>{
+        if(error.error.message == "exist"){
+          this.typForm.controls["titre"].setErrors({'incorrect' : true});
+        }
+      });
+    }else{
+      this.typeEquipmentService.addType(this.typForm.value["titre"]!).subscribe((result : any) => {
+        this.allTypes();
+        this.submitted = false;
+        this.typForm.reset();
+      },((error) => {
+        if(error.error.message == "exist"){
+          this.typForm.controls["titre"].setErrors({'incorrect' : true});
+        }
+      }));
+    }
     
   }
 
   allTypes(){
     this.typeEquipmentService.allType().subscribe((result : any) => {
       this.types = result["data"];
+      this.searchResult = result["data"];
     })
+  }
+
+  changeEdiType(type : TypeEquipement){
+    this.editType = type;
+    this.typForm.patchValue({titre : type.titre});
+    this.isEdit = true;
+  }
+
+  cancelEdit(){
+    this.editType = new TypeEquipement();
+    this.submitted = false;
+    this.typForm.reset();
+    this.isEdit = false;
+  }
+
+  openDialog(type : TypeEquipement) {
+    const dialogRef = this.dialog.open(TypeDialogComponent, {
+      data: {
+        'idType' : type.idTypeEquipement,
+        'titre' : type.titre
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != undefined){
+        this.typeEquipmentService.deleteType(type.idTypeEquipement!).subscribe((result)=>{
+          this.allTypes();
+        })
+      }
+    });
+  }
+
+  search(){
+    this.searchResult = this.types.filter((ele) => ele.titre?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()));
   }
 
 }
