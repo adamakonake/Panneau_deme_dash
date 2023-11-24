@@ -1,0 +1,24 @@
+<main>
+    <div class="searchBarDiv">
+        <div class="searchInputAndIconDiv">
+            <div class="searchIconDiv">
+                <img class="searchIcon" src="../../../assets/search_icon.png" alt="" srcset="">
+            </div>
+            <input class="searchInput" type="text" placeholder="Recherche" [(ngModel)]="searchValue" (keyup)="search()" >
+        </div>
+    </div>
+    <div class="listUsers">
+        <div class="card" *ngFor="let user of searchResult">
+            <div class="imageDiv">
+                <div class="profil">
+                    <p class="profilText">{{user.prenom | slice:0:1}}{{user.nom | slice:0:1}}</p>
+                </div>
+                <div class="nameDiv">
+                    <p><span>Prenom : </span>{{user.prenom}}</p>
+                    <p><span>Nom : </span>{{user.nom}}</p>
+                </div>
+            </div>
+            <p><span>Email : </span>{{user.email}}</p>
+        </div>
+    </div>
+</main>

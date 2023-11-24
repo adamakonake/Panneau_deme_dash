@@ -24,12 +24,17 @@
                     DEME
                 </p>
             </div>
-            <form id="myForm">
+            <form id="myForm" [formGroup]="formForgot" (ngSubmit)="onSubmit()">
                 <div class="champ_input">
-                    <input type="email"  class="input_focus" id="email" placeholder="" >
+                    <input [ngStyle]="{'border': submitted && f['email'].errors ? '1px solid red' : null}" type="email"  class="input_focus" id="email" placeholder="" formControlName="email">
                     <label for="email" class="label">Email</label>
                 </div>
-                <input class="btnSend" type="button" value="Envoyer code">
+                <div *ngIf="submitted && f['email'].errors" class="errorDiv">
+                    <span *ngIf="submitted && f['email'].errors!['required']">Email requit</span>
+                    <span *ngIf="submitted && f['email'].errors!['email']">Email non valid</span>
+                    <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrectt</span>
+                </div>
+                <input class="btnSend" type="submit" value="Envoyer code">
             </form>
         </div>
     </div>

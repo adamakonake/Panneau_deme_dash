@@ -22,13 +22,17 @@
                     DEME
                 </p>
             </div>
-            <form id="myForm">
+            <form id="myForm" [formGroup]="formValidCode" (ngSubmit)="onSubmit()">
                 <div class="champ_input">
-                    <input type="number"  class="input_focus" id="code" placeholder="" >
+                    <input [ngStyle]="{'border': submitted && f['code'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="code" placeholder="" formControlName = "code" >
                     <label for="code" class="label">Code de verification</label>
                 </div>
-                <p class="forgotText" >Code non reçu ?</p>
-                <input class="btnVerifier" type="button" value="Verifier">
+                <div *ngIf="submitted && f['code'].errors" class="errorDiv">
+                    <span *ngIf="submitted && f['code'].errors!['required']">Code requit</span>
+                    <span *ngIf="submitted && f['code'].errors!['incorrect']">Code incorrectt</span>
+                </div>
+                <p class="forgotText" (click)="resendCode()" >Code non reçu ?</p>
+                <input class="btnVerifier" type="submit" value="Verifier">
             </form>
         </div>
     </div>

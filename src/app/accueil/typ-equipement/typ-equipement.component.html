@@ -19,15 +19,18 @@
             </div>
         </div>
         <form class="formType" [formGroup]="typForm" (ngSubmit)="onSubmit()">
+            <p *ngIf="!isEdit">Nouveau type équipement</p>
             <div>
+                
                 <div class="champ_input">
-                    <input [ngStyle]="{'border': submitted && f['titre'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="titre" placeholder="" formControlName="titre" >
+                    <input [ngStyle]="{'border': submitted && f['titre'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="titre" placeholder="" formControlName="titre" style="padding-left: 10px;" >
                     <label for="titre" class="label">Titre</label>
                 </div>
                 <div *ngIf="submitted && f['titre'].errors" class="errorDiv">
                     <span *ngIf="submitted && f['titre'].errors!['required']">Titre requit</span>
                     <span *ngIf="f['titre'].errors!['minlength']">Titre inferieur à trois(3)</span>
                     <span *ngIf="submitted && f['titre'].errors!['incorrect']">Ce type existe déjà</span>
+                    <span *ngIf="submitted && f['titre'].errors!['maxlength']">Titre supérieure à 54</span>
                 </div>
             </div>
             <div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { AuthGuardService } from './guard/auth-guard.service';
+import { ForgotPageGuardService } from './guard/forgot-page-guard.service';
 
 const routes: Routes = [
   {
@@ -14,11 +15,13 @@ const routes: Routes = [
   },
   {
     path : 'validation-mail-page',
-    loadChildren : () => import('./validation-mail-page/validation-mail-page.module').then(m => m.ValidationMailPageModule)
+    loadChildren : () => import('./validation-mail-page/validation-mail-page.module').then(m => m.ValidationMailPageModule),
+    canActivate : [ForgotPageGuardService]
   },
   {
     path : 'reset-page',
-    loadChildren : () => import('./reset-page/reset-page.module').then(m => m.ResetPageModule)
+    loadChildren : () => import('./reset-page/reset-page.module').then(m => m.ResetPageModule),
+    canActivate : [ForgotPageGuardService]
   },
   {
     path : 'accueil',

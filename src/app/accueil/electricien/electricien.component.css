@@ -39,6 +39,7 @@ header{
     outline: none;
     font-size: 16px;
     font-family: 'poppins';
+    cursor: pointer;
 }
 
 .searchInput {
@@ -102,7 +103,7 @@ header{
     height: 70px;
     border-radius: 50%;
     border: 3px solid rgb(29, 29, 119);
-    background-image: url('../../../assets/banner_img.jpg');
+    /* background-image: url('../../../assets/banner_img.jpg'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -126,12 +127,14 @@ header{
     background-color: #35BA63;
     color: white;
     margin-bottom: 2.5px;
+    cursor: pointer;
 }
 
 .btnDesactiver{
     background-color: red;
     color: white;
     margin-top: 2.5px;
+    cursor: pointer;
 }
 
 .card span {

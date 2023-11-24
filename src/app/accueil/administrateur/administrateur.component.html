@@ -1,0 +1,53 @@
+<main>
+    <header>
+        <div class="headerBarDiv">
+            <div class="searchInputAndIconDiv">
+                <div class="searchIconDiv">
+                    <img class="searchIcon" src="../../../assets/search_icon.png" alt="" srcset="">
+                </div>
+                <input class="searchInput" type="text" placeholder="Recherche" [(ngModel)]="searchValue" (keyup)="search()" >
+            </div>
+        </div>
+        <div class="headerBarDiv sortAndAdd" >
+            <div class="searchInputAndIconDiv sortAndAddOutlineDiv">
+                <div class="searchIconDiv sortAndAddIconDiv">
+                    <img class="searchIcon" src="../../../assets/sortIscon.png" alt="" srcset="">
+                </div>
+                <select class="selectTag" name="type" id="mat-select" [(ngModel)]="sortValue" (change)="sort()">
+                    <option value="all" >Trier par</option>
+                    <option value="active" >Active</option>
+                    <option value="nonActive" >Désactive</option>
+                    <option value="admin" >Admin</option>
+                    <option value="nonAdmin" >Super admin</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="currentAdmin">
+            <div class="headerBarDiv sortAndAdd" *ngIf="currentAdmin.superAdmin == true">
+                <div class="searchInputAndIconDiv sortAndAddOutlineDiv" (click)="openDialog('ajout')">
+                    <div class="searchIconDiv sortAndAddIconDiv">
+                        <img class="searchIcon" src="../../../assets/plusIcon.png" alt="" srcset="">
+                    </div>
+                    <p class="searchInput trieAndAddText">Ajouter</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="listAdministrateur">
+       <div class="card" *ngFor="let admin of searchResult">
+            <div class="profilDiv">
+                <div class="profil" style="background-image: url(http://localhost{{admin.photo}});"></div>
+            </div>
+            <p class="propriete"><span>Nom : </span>{{admin.nom}}</p>
+            <p class="propriete"><span>Prenom : </span>{{admin.prenom}}</p>
+            <p class="propriete"><span>Email : </span>{{admin.email}}</p>
+            <p class="propriete"><span>Tel : </span>{{admin.telephone}}</p>
+            <p class="propriete"><span>Super admin : </span>{{(admin.superAdmin==true? 'Oui' : 'Non')}}</p>
+            <p *ngIf="currentAdmin.superAdmin == false" class="propriete"><span>Active : </span>{{(admin.active==true? 'Oui' : 'Non')}}</p>
+            <div class="btnGroup" *ngIf="currentAdmin.superAdmin == true">
+                <input class="btnChangeState" type="button" [value]="(admin.superAdmin==true? 'Admin' : 'Super Admin')" (click)="openDialog('state',admin)">
+                <input class="btnDesactiver" type="button" [value]="(admin.active==true? 'Désactiver' : 'Activer')" (click)="openDialog('disable',admin)">
+            </div>
+       </div>
+    </div>
+</main>

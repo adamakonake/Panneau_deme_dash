@@ -116,16 +116,24 @@ main{
     text-align: end;
     cursor: pointer;
 }
+
+.errorDiv span{
+    margin: 0px;
+    color: red;
+    font-size: 14px;
+}
+
 .btnSend {
     color: #FFFFFF;
     background-color: rgb(29, 29, 119);
     border: none;
     border-radius: 5px;
     margin-top: 30px;
+    cursor: pointer;
 }
 
 
-/* Ecron Tablet */
+/* Ecran Tablet */
 
 @media screen and (min-width : 768px) and (max-width :1023px){
 

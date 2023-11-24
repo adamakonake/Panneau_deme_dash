@@ -123,6 +123,12 @@ main{
     margin-top: 30px;
 }
 
+.errorDiv span{
+    margin: 0px;
+    color: red;
+    font-size: 14px;
+}
+
 
 /* Ecron Tablet */
 

@@ -27,6 +27,14 @@ const routes: Routes = [
     {
       path : 'electricien',
       loadChildren : () => import("./electricien/electricien.module").then(m => m.ElectricienModule)
+    },
+    {
+      path : 'administrateur',
+      loadChildren : () => import("./administrateur/administrateur.module").then(m => m.AdministrateurModule)
+    },
+    {
+      path : 'utilisateur',
+      loadChildren : () => import("./utilisateur/utilisateur.module").then(m => m.UtilisateurModule)
     }
   ]
 }

@@ -23,16 +23,24 @@
                     DEME
                 </p>
             </div>
-            <form id="myForm">
+            <form id="myForm" [formGroup]="formReset" (ngSubmit)="onSubmit()">
                 <div class="champ_input">
-                    <input type="text"  class="input_focus" id="motDePasse" placeholder="" >
+                    <input [ngStyle]="{'border': submitted && f['password'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="motDePasse" placeholder="" formControlName="password" >
                     <label for="motDePasse" class="label">Mot de passe</label>
                 </div>
+                <div *ngIf="submitted && f['password'].errors" class="errorDiv">
+                    <span *ngIf="f['password'].errors!['minlength']">Mot de passe inferieur à six(6)</span>
+                    <span *ngIf="f['password'].errors!['required']">Mot de passe requit</span>
+                </div>
                 <div class="champ_input">
-                    <input type="text"  class="input_focus" id="confirmation" placeholder="" >
+                    <input [ngStyle]="{'border': submitted && f['confirm'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="confirmation" placeholder="" formControlName="confirm" >
                     <label for="confirmation" class="label">Confirmation</label>
                 </div>
-                <input class="btnReset" type="button" value="Réinitialiser">
+                <div *ngIf="submitted && f['confirm'].errors" class="errorDiv">
+                    <span *ngIf="f['confirm'].errors!['required']">Mot de passe requit</span>
+                    <span *ngIf="submitted && f['confirm'].errors!['incorrect']">Incorrect</span>
+                </div>
+                <input class="btnReset" type="submit" value="Réinitialiser">
             </form>
         </div>
     </div>

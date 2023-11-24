@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EquipementDialogComponent } from 'src/app/composants/equipement-dialog/equipement-dialog.component';
 import { Equipement } from 'src/app/model/equipement';
 import { TypeEquipement } from 'src/app/model/type-equipement';
+import { AccueilService } from 'src/app/services/accueil.service';
 import { EquipementService } from 'src/app/services/equipement.service';
 import { TypeEquipementService } from 'src/app/services/type-equipement.service';
 
@@ -19,9 +20,10 @@ export class EquipementComponent implements OnInit {
   searchValue : string = "";
   sortValue : number = 0;
 
-  constructor(public dialog: MatDialog, private equipementService : EquipementService){}
+  constructor(public dialog: MatDialog, private equipementService : EquipementService, private accueilService : AccueilService){}
   
   ngOnInit(): void {
+    this.accueilService.pageIndex.next(2);
     this.getEquipements();
     this.equipementService.initTypeEquipement();
     this.equipementService.typesForEquipementCompoent.subscribe((result)=>{

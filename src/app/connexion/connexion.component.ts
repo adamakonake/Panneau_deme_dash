@@ -5,6 +5,8 @@ import { AdminService } from '../services/admin.service';
 import { Admin } from '../model/admin';
 import { HttpClient } from '@angular/common/http';
 import { EncryptStorage } from 'encrypt-storage';
+import { MatDialog } from '@angular/material/dialog';
+import { ConnexionDialogComponent } from '../composants/connexion-dialog/connexion-dialog.component';
 
 
 export const encryptStorage = new EncryptStorage('secret-key-value',{
@@ -25,7 +27,7 @@ export class ConnexionComponent {
 
   submitted = false;
 
-  constructor(private route : Router, private formBuilder : FormBuilder, private adminService : AdminService, private http : HttpClient){}
+  constructor(private route : Router, private formBuilder : FormBuilder, private adminService : AdminService, private http : HttpClient, public dialog: MatDialog){}
 
   gotToForgotPage(){
     this.route.navigate(['forgot-page']);
@@ -56,6 +58,9 @@ export class ConnexionComponent {
       }
       if(error.error.message == "email invalid"){
         this.formLogin.controls["email"].setErrors({'incorrect' : true});
+      }
+      if(error.error.message == "disabled"){
+        const dialogRef = this.dialog.open(ConnexionDialogComponent);
       }
     }));
 

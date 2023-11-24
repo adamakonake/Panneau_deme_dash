@@ -1,0 +1,100 @@
+<!----------------------------------------- Dialogue de confirmation de suppression ------------------------------------->
+
+<main *ngIf="data.action == 'disable'">
+    <p *ngIf="data.administrateur.active == true " class="message">Voulez-vous vraiment désactivé cet<br>administrateur ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <p *ngIf="data.administrateur.active == false " class="message">Voulez-vous vraiment activé cet<br>administrateur ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <div class="btnGroupe" >
+        <input class="ok" type="button" value="Oui" (click) = "supprimer()" >
+        <input class="no" type="button" value="Non" (click) = "closeDialog()" >
+    </div>
+</main>
+
+<main *ngIf="data.action == 'state'">
+    <p *ngIf="data.administrateur.active == true " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <p *ngIf="data.administrateur.active == false " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En super admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <div class="btnGroupe" >
+        <input class="ok" type="button" value="Oui" (click) = "supprimer()" >
+        <input class="no" type="button" value="Non" (click) = "closeDialog()" >
+    </div>
+</main>
+
+<!----------------------------------------- Formulaire d'ajout et de modificatio ------------------------------------->
+
+<form *ngIf="data.action != 'disable' && data.action != 'state'" class="equipementForm" [formGroup]="formAdmin" (ngSubmit)="onSubmit()" >
+    <div class="imageDiv">
+        <div id="imgProfil" [style]="data.administrateur.photo != undefined ? 'background-image: url(http://localhost'+data.administrateur.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
+        <input id="btnPhoto" type="button" (click)="readURL()" value="Photo" >
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['nom'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="nom" placeholder="" formControlName="nom">
+        <label for="nom" class="label">Nom</label>
+    </div>
+    <div *ngIf="submitted && f['nom'].errors" class="errorDiv">
+        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requit</span>
+        <span *ngIf="submitted && f['nom'].errors!['minlength']">Nom inférieur à quatre(4) caractères</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['prenom'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="prenom" placeholder="" formControlName="prenom">
+        <label for="prenom" class="label">Prenom</label>
+    </div>
+    <div *ngIf="submitted && f['prenom'].errors" class="errorDiv">
+        <span *ngIf="submitted && f['prenom'].errors!['required']">Prenom requit</span>
+        <span *ngIf="submitted && f['prenom'].errors!['minlength']">Prenom inférieur à quatre(4) caractères</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['email'].errors ? '1px solid red' : null}" type="email"  class="input_focus" id="email" placeholder="" formControlName="email">
+        <label for="email" class="label">Email</label>
+    </div>
+    <div *ngIf="submitted && f['email'].errors" class="errorDiv">
+        <span *ngIf="submitted && f['email'].errors!['required']">Email requit</span>
+        <span *ngIf="submitted && f['email'].errors!['email']">Email non valid</span>
+        <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrectt</span>
+    </div>
+    <div class="champ_input">
+        <input [ngStyle]="{'border': submitted && f['telephone'].errors ? '1px solid red' : null}" type="tel"  class="input_focus" id="telephone" placeholder="" formControlName="telephone" >
+        <label for="telephone" class="label">Telephone</label>
+    </div>
+    <div *ngIf="submitted && f['telephone'].errors" class="errorDiv">
+        <span *ngIf="f['telephone'].errors!['minlength']">Telephone est inferieur à 0</span>
+        <span *ngIf="f['telephone'].errors!['required']">Telephone requit</span>
+    </div>
+    <div class="optionalFormEdit" *ngIf="data.action == 'modif'">
+        <div class="champ_input">
+            <input [ngStyle]="{'border': submitted && f['oldPassword'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="oldPassword" placeholder="" formControlName="oldPassword" >
+            <label for="oldPassword" class="label">Encien mot de passe</label>
+        </div>
+        <div *ngIf="submitted && f['oldPassword'].errors" class="errorDiv">
+            <span *ngIf="submitted && f['oldPassword'].errors!['incorrect']">Mot de passe incorrecte</span>
+            <span *ngIf="submitted && f['oldPassword'].errors!['vide']">Champs requit</span>
+            <span *ngIf="submitted && f['oldPassword'].errors!['min']">Mot de passe inferieure à six(6)</span>
+        </div>
+        <div class="champ_input">
+            <input [ngStyle]="{'border': submitted && f['password'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="motDePasse" placeholder="" formControlName="password" >
+            <label for="motDePasse" class="label">Nouveau mot de passe</label>
+        </div>
+        <div *ngIf="submitted && f['password'].errors" class="errorDiv">
+            <span *ngIf="submitted && f['password'].errors!['min']">Mot de passe inferieure à six(6)</span>
+        </div>
+        <div class="champ_input">
+            <input [ngStyle]="{'border': submitted && f['confirmation'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="confirmation" placeholder="" formControlName="confirmation" >
+            <label for="confirmation" class="label">Confirmation</label>
+        </div>
+        <div *ngIf="submitted && f['confirmation'].errors" class="errorDiv">
+            <span *ngIf="submitted && f['confirmation'].errors!['incorrect']">Incorrecte</span>
+            <span *ngIf="submitted && f['confirmation'].errors!['min']">Mot de passe inferieure à six(6)</span>
+            <span *ngIf="submitted && f['confirmation'].errors!['vide']">Champs requit</span>
+        </div>
+    </div>
+    <div *ngIf="data.action != 'modif'">
+        <label class="optionalForm"  class="typeLabel" for="type">Super admin : </label>
+        <select class="slectSuperAdmin" [ngStyle]="{'border': submitted && f['superAdmin'].errors ? '1px solid red' : null}" name="type" id="type" formControlName="superAdmin">
+            <option value="false">Non</option>
+            <option value="true">Oui</option>
+        </select>
+    </div>
+    <input id="file" type="file" formControlName="file">
+    <div class="btnGroup">
+        <input class="btnAjouter" type="submit" [value]="data.action == 'ajout' ? 'Ajouter' : 'Modifier'" >
+        <input class="btnAnnuler" type="button"  value="Annuler" (click)="closeDialog()">
+    </div>
+</form>

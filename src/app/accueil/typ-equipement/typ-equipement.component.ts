@@ -4,6 +4,7 @@ import { TypeEquipement } from 'src/app/model/type-equipement';
 import { TypeEquipementService } from 'src/app/services/type-equipement.service';
 import {MatDialog} from '@angular/material/dialog';
 import { TypeDialogComponent } from 'src/app/composants/type-dialog/type-dialog.component';
+import { AccueilService } from 'src/app/services/accueil.service';
 
 @Component({
   selector: 'app-typ-equipement',
@@ -17,7 +18,7 @@ export class TypEquipementComponent implements OnInit {
   searchValue : string = "";
 
   typForm = this.formBuilder.group({
-    titre : ['',[Validators.required,Validators.minLength(3)]]
+    titre : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(54)]]
   });
 
   submitted = false;
@@ -26,9 +27,10 @@ export class TypEquipementComponent implements OnInit {
 
   editType = new TypeEquipement();
 
-  constructor(private formBuilder : FormBuilder, private typeEquipmentService : TypeEquipementService,public dialog: MatDialog){}
+  constructor(private formBuilder : FormBuilder, private typeEquipmentService : TypeEquipementService,public dialog: MatDialog, private accueilService : AccueilService){}
 
   ngOnInit(): void {
+    this.accueilService.pageIndex.next(3);
     this.allTypes();
   }
 

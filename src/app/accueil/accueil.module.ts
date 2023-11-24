@@ -15,6 +15,11 @@ import { EquipementModule } from './equipement/equipement.module';
 import {MatSelectModule} from '@angular/material/select';
 import { ElectricienComponent } from './electricien/electricien.component';
 import { ElectricienModule } from './electricien/electricien.module';
+import { IgcFormsModule } from 'igniteui-angular';
+import { AdministrateurComponent } from './administrateur/administrateur.component';
+import { AdministrateurModule } from './administrateur/administrateur.module';
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { UtilisateurModule } from './utilisateur/utilisateur.module';
 
 
 @NgModule({
@@ -23,6 +28,8 @@ import { ElectricienModule } from './electricien/electricien.module';
     TypEquipementComponent,
     EquipementComponent,
     ElectricienComponent,
+    AdministrateurComponent,
+    UtilisateurComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +43,10 @@ import { ElectricienModule } from './electricien/electricien.module';
     FormsModule,
     EquipementModule,
     MatSelectModule,
-    ElectricienModule
+    ElectricienModule,
+    IgcFormsModule,
+    AdministrateurModule,
+    UtilisateurModule
   ]
 })
 export class AccueilModule { }

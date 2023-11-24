@@ -73,8 +73,14 @@ main{
     border: 1px solid rgb(29, 29, 119);
     border-radius: 2px;
     margin-bottom: 10px;
-
+    max-width: 570px;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none
 }
+.typeItem::-webkit-scrollbar {
+    display: none;
+  }
 
 .titreType{
     font-size: 20px;
@@ -91,6 +97,7 @@ main{
     height: 25px;
     width: auto;
     margin-right: 10px;
+    cursor: pointer;
 }
 .formType{
     width: 40%;
@@ -171,6 +178,7 @@ main{
     padding-right: 10px;
     background-color: #35BA63;
     color: white;
+    cursor: pointer;
 }
 .btnModif{
     width: 77px;
@@ -182,6 +190,7 @@ main{
     background-color: #35BA63;
     color: white;
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .btnCancel{
@@ -194,6 +203,7 @@ main{
     background-color: red;
     color: white;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 @media screen and (max-width : 767px) {

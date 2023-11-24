@@ -14,8 +14,9 @@
                     <img class="searchIcon" src="../../../assets/sortIscon.png" alt="" srcset="">
                 </div>
                 <select class="selectTag" name="type" id="mat-select" [(ngModel)]="sortValue" (change)="sort()">
-                    <option value="0">Trier par</option>
-                    <option *ngFor="let type of types ; let i = index" [value]="type.idTypeEquipement">{{type.titre}}</option>
+                    <option value="all" >Trier par</option>
+                    <option value="true" >Active</option>
+                    <option value="false" >Désactive</option>
                 </select>
             </div>
         </div>
@@ -29,22 +30,23 @@
         </div>
     </header>
     <div class="listElectricien">
-        <div class="card" >
+        <div class="card" *ngFor="let electricien of searchResult ; let i= index" >
             <div class="cardProfil">
-                <div class="profilImgDiv"></div>
+                <div class="profilImgDiv" style="background-image: url(http://localhost{{electricien.photo}});"></div>
                 <div class="actionBtnDiv">
-                    <input class="btnModifier" type="button" value="Modifier">
-                    <input class="btnDesactiver" type="button" value="Désactiver">
+                    <input class="btnModifier" type="button" value="Modifier" (click)="openDialog('modif',electricien)" >
+                    <input class="btnDesactiver" type="button" [value]="(electricien.active == true) ? 'Désactiver' : 'Activer'" (click)="openDialog('disable',electricien)">
                 </div>
             </div>
-            <div class="propriete"><span>Prenom : </span></div>
-            <div class="propriete"><span>Nom : </span></div>
-            <div class="propriete"><span>Expérience : </span></div>
-            <div class="propriete"><span>Email : </span></div>
-            <div class="propriete"><span>Tel : </span></div>
+            <p class="propriete"><span>Prenom : </span>{{electricien.nom}}</p>
+            <p class="propriete"><span>Nom : </span>{{electricien.prenom}}</p>
+            <p class="propriete"><span>Expérience : </span>{{electricien.experience}}</p>
+            <p class="propriete"><span>Email : </span>{{electricien.email}}</p>
+            <p class="propriete"><span>Tel : </span>{{electricien.telephone}}</p>
             <div class="ratingDiv">
-                <div class="propriete"><span>Note</span></div>
-                
+                <p class="propriete"><span>Note : </span></p>
+                <igc-rating  min="1" max="5" size="small" readonly="true" [(ngModel)]="notes[i]" ></igc-rating>
+                <p> / {{nmbreNote[i]}}</p>
             </div>
         </div>
     </div>

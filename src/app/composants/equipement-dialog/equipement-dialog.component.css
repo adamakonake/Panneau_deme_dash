@@ -76,6 +76,7 @@
     padding-right: 10px;
     background-color: #35BA63;
     color: white;
+    cursor: pointer;
 }
 .btnAnnuler{
     width: 77px;
@@ -86,6 +87,7 @@
     padding-right: 10px;
     background-color: red;
     color: white;
+    cursor: pointer;
 }
 
 /* -------------------------------------------------suppresion style----------------------------------- */
@@ -113,6 +115,7 @@ main{
     background-color: red;
     color: white;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 .no{
@@ -125,4 +128,5 @@ main{
     background-color: rgb(29, 29, 119);
     color: white;
     margin-right: 15px;
+    cursor: pointer;
 }

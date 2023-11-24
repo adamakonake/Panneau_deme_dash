@@ -8,33 +8,33 @@
             </div>
         </div>
         <div class="headerRightSection">
-            <div class="divProfil">
-                <div class="adminPhoto"></div>
+            <div class="divProfil" (click)="openDialog('modif',admin)">
+                <div class="adminPhoto" style="background-image: url(http://localhost{{admin.photo}});"></div>
                 <p class="adminNom">{{admin ? admin.prenom : "ted"}} {{admin ? admin.nom : "rt"}}</p>
             </div>
-            <div class="divLogOut">
+            <div class="divLogOut" (click)="logOut('logOut',admin)">
                 <img class="logOutIcon" src="../../assets/log_out_icon.png" alt="" srcset="">
             </div>
         </div>
     </header>
     <div class="body">
         <div id="sideBarre" class="sideBarreHide">
-            <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="goToAccueil(1)">
+            <div [ngClass]="index == 1 ? 'menuItemSelected' : 'menuItem'" (click)="goToAccueil()">
                 <p>Accueil</p>
             </div>
-            <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="goToEquipement(2)">
+            <div [ngClass]="index == 2 ? 'menuItemSelected' : 'menuItem'" (click)="goToEquipement()">
                 <p>Equipements</p>
             </div>
-            <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="goToType(3)">
+            <div [ngClass]="index == 3 ? 'menuItemSelected' : 'menuItem'" (click)="goToType()">
                 <p>Type</p>
             </div>
-            <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="goToElectricien(4)">
+            <div [ngClass]="index == 4 ? 'menuItemSelected' : 'menuItem'" (click)="goToElectricien()">
                 <p>Electriciens</p>
             </div>
-            <div [ngClass]="index == 5 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(5)">
+            <div [ngClass]="index == 5 ? 'menuItemSelected' : 'menuItem'" (click)="goToAdmin()">
                 <p>Administrateurs</p>
             </div>
-            <div [ngClass]="index == 6 ? 'menuItemSelected' : 'menuItem'" (click)="changeIndex(6)">
+            <div [ngClass]="index == 6 ? 'menuItemSelected' : 'menuItem'" (click)="goToUsers()">
                 <p>Utilisateurs</p>
             </div>
             <img class="logSideBarre" src="../../assets/logo_deme.png" alt="" srcset="">

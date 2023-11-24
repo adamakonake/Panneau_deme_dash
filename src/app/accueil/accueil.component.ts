@@ -1,8 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Admin } from '../model/admin';
 import { AdminService } from '../services/admin.service';
 import { EncryptStorage } from 'encrypt-storage';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AdministrateurDialogComponent } from '../composants/administrateur-dialog/administrateur-dialog.component';
+import { LogoutDialogComponent } from '../composants/logout-dialog/logout-dialog.component';
+import { AccueilService } from '../services/accueil.service';
 
 export const encryptStorage = new EncryptStorage('secret-key-value',{
   storageType: 'sessionStorage',
@@ -20,11 +24,15 @@ export class AccueilComponent implements OnInit, OnDestroy {
   sideBarreDepilled : boolean = false;
   admin! : Admin;
 
-  constructor(private adminService : AdminService, private route : Router){}
-
+  constructor(private adminService : AdminService, private route : Router, public dialog: MatDialog,private accueilService : AccueilService,
+    private cd : ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.admin = encryptStorage.decryptValue<Admin>(encryptStorage.getItem('currentAdmin')!) ;  //Object.assign(new Admin(),encryptStorage.getItem('currentAdmin'));
+    this.accueilService.pageIndex.subscribe((result)=>{
+      this.index = result;
+      this.cd.detectChanges();
+    })
     var sideBarre = document.getElementById("sideBarre");
     var sideBtn = document.getElementById("menuIconDiv");
     var netIcon = document.getElementById("iconNext")
@@ -63,28 +71,62 @@ export class AccueilComponent implements OnInit, OnDestroy {
     })
   }
 
-  changeIndex(index : number) : void{
-    this.index = index;
-  }
-
-  goToAccueil(index : number){
-    this.changeIndex(index);
+  goToAccueil(){
     this.route.navigate(['accueil/welcome-page']);
   }
 
-  goToType(index : number){
-    this.changeIndex(index);
+  goToType(){
     this.route.navigate(['accueil/typ-equipement']);
   }
 
-  goToEquipement(index : number){
-    this.changeIndex(index);
+  goToEquipement(){
     this.route.navigate(['accueil/equipement']);
   }
 
-  goToElectricien(index : number){
-    this.changeIndex(index);
+  goToElectricien(){
     this.route.navigate(['accueil/electricien']);
+  }
+
+  goToAdmin(){
+    this.route.navigate(['accueil/administrateur']);
+  }
+
+  goToUsers(){
+    this.route.navigate(['accueil/utilisateur']);
+  }
+
+  openDialog(action : string,administrateur : Admin) {
+    const dialogRef = this.dialog.open(AdministrateurDialogComponent, {
+      data: {
+        'administrateur' : administrateur,
+        'action' : action,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if(result != undefined){
+        window.location.reload();
+      }
+    });
+  }
+
+  logOut(action : string, administrateur? : Admin){
+    const dialogRef = this.dialog.open(LogoutDialogComponent, {
+      data: {
+        'administrateur' : administrateur,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if(result != undefined){
+        encryptStorage.removeItem('currentAdmin');
+        encryptStorage.removeItem('isLogin');
+        this.adminService.isLogin = false;
+        this.route.navigate(['']);
+      }
+    });
   }
 
   ngOnDestroy(): void {

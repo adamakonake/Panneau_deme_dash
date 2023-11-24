@@ -22,6 +22,7 @@ main{
     background-color: red;
     color: white;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 .no{
@@ -34,4 +35,5 @@ main{
     background-color: rgb(29, 29, 119);
     color: white;
     margin-right: 15px;
+    cursor: pointer;
 }

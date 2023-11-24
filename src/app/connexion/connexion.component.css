@@ -120,6 +120,7 @@ main{
     background-color: rgb(29, 29, 119);
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 

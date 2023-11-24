@@ -1,50 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Equipement } from 'src/app/model/equipement';
 import { TypeEquipement } from 'src/app/model/type-equipement';
 import { EquipementService } from 'src/app/services/equipement.service';
+import { defineComponents, IgcRatingComponent } from 'igniteui-webcomponents';
+import { ElectricienDialogComponent } from 'src/app/composants/electricien-dialog/electricien-dialog.component';
+import { ElectricienService } from 'src/app/services/electricien.service';
+import { Electricien } from 'src/app/model/electricien';
+import { AccueilService } from 'src/app/services/accueil.service';
+
+defineComponents(IgcRatingComponent);
 
 @Component({
   selector: 'app-electricien',
   templateUrl: './electricien.component.html',
   styleUrls: ['./electricien.component.css']
 })
-export class ElectricienComponent {
+export class ElectricienComponent implements OnInit {
 
-  equipements : Equipement[] = [];
-  searchResult : Equipement[] = [];
-  types : TypeEquipement[] = [];
+  electriciens : Electricien[] = [];
+  notes : number[] = [];
+  nmbreNote : number[] = [];
+  searchResult : Electricien[] = [];
   searchValue : string = "";
-  sortValue : number = 0;
+  sortValue : string = "all";
 
-  constructor(public dialog: MatDialog, private equipementService : EquipementService){}
+  constructor(public dialog: MatDialog, private electricienService : ElectricienService, private accueilService : AccueilService){}
 
+  ngOnInit(): void {
+    this.accueilService.pageIndex.next(4);
+    this.getElectriciens();
+  }
 
-  openDialog(action : string,equipement? : Equipement) {
-    // const dialogRef = this.dialog.open(EquipementDialogComponent, {
-    //   data: {
-    //     'equipement' : equipement,
-    //     'action' : action,
-    //   },
-    // });
+  getElectriciens(){
+    this.electricienService.getElectriciens().subscribe((result : any)=>{
+      this.electriciens = result["data"]["electriciens"];
+      this.searchResult = result["data"]["electriciens"];
+      this.notes = result["data"]["notes"];
+      this.nmbreNote = result["data"]["nmbreNote"];
+    })
+  }
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result)
-    //   if(result != undefined){
-    //   }
-    // });
+  openDialog(action : string,electricien? : Electricien) {
+    const dialogRef = this.dialog.open(ElectricienDialogComponent, {
+      data: {
+        'electricien' : electricien,
+        'action' : action,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if(result != undefined){
+        this.getElectriciens();
+      }
+    });
   }
 
   search(){
-    this.searchResult = this.equipements.filter((ele) => ele.nom?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()) || 
-    ele.marque?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()));
+    this.searchResult = this.electriciens.filter((ele) => ele.nom?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()) || 
+    ele.prenom?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()) || 
+    ele.email?.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()));
   }
 
   sort(){
-    if(+this.sortValue == 0){
-      this.searchResult = this.equipements;
+    console.log(this.sortValue)
+    if(this.sortValue == "all"){
+      this.searchResult = this.electriciens;
+    }else if(this.sortValue == "true"){
+      this.searchResult = this.electriciens.filter((ele) => ele.active == true);
     }else{
-      this.searchResult = this.equipements.filter((ele) => ele.typeEquipement?.idTypeEquipement == this.sortValue);
+      this.searchResult = this.electriciens.filter((ele) => ele.active == false);
     }
   }
 

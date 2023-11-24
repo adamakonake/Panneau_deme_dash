@@ -46,6 +46,7 @@ header {
     border-radius: 50px;
     padding-left: 3px;
     padding-right: 3px;
+    cursor: pointer;
 }
 .adminPhoto {
     height: 40px;
@@ -69,6 +70,7 @@ header {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    cursor: pointer;
 }
 .logOutIcon {
     width: 24.61px;
@@ -105,13 +107,17 @@ header {
     font-size: 20px;
     font-family: "poppins-enmBold";
     color: rgb(29, 29, 119);
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     transition: 0.3s all;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
     &:hover{
-        border: 1px solid rgb(29, 29, 119);
-        border-radius: 25px;
-        transition: 0.3s all;
+        /* border: 1px solid rgb(29, 29, 119); */
+        background-color: rgba(29, 29, 119, 0.144);
+        /* border-radius: 25px; */
+        transition: .5s all;
+        /* padding-left: 5px; */
     }
 }
 .menuItemSelected {
@@ -119,10 +125,12 @@ header {
     font-size: 20px;
     font-family: "poppins-enmBold";
     color: white;
-    text-align: center;
     margin-top: 20px;
     background-color: rgb(29, 29, 119);
-    border-radius: 25px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s all;
 }
 .logSideBarre{
     width: 175px;
