@@ -10,8 +10,8 @@
 </main>
 
 <main *ngIf="data.action == 'state'">
-    <p *ngIf="data.administrateur.active == true " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
-    <p *ngIf="data.administrateur.active == false " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En super admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <p *ngIf="data.administrateur.superAdmin == true " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
+    <p *ngIf="data.administrateur.superAdmin == false " class="message">Voulez-vous vraiment changer cet adminstrateur<br>En super admin ?<br>{{data.administrateur.nom}} {{data.administrateur.prenom}}</p>
     <div class="btnGroupe" >
         <input class="ok" type="button" value="Oui" (click) = "supprimer()" >
         <input class="no" type="button" value="Non" (click) = "closeDialog()" >
@@ -22,7 +22,8 @@
 
 <form *ngIf="data.action != 'disable' && data.action != 'state'" class="equipementForm" [formGroup]="formAdmin" (ngSubmit)="onSubmit()" >
     <div class="imageDiv">
-        <div id="imgProfil" [style]="data.administrateur.photo != undefined ? 'background-image: url(http://localhost'+data.administrateur.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
+        <div *ngIf="data.action == 'ajout'" id="imgProfil" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
+        <div *ngIf="data.action == 'modif'" id="imgProfil" [style]="data.administrateur.photo != undefined ? 'background-image: url(http://localhost'+data.administrateur.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
         <input id="btnPhoto" type="button" (click)="readURL()" value="Photo" >
     </div>
     <div class="champ_input">

@@ -13,7 +13,8 @@
 
 <form *ngIf="data.action != 'disable'" class="equipementForm" [formGroup]="formElectricien" (ngSubmit)="onSubmit()" >
     <div class="imageDiv">
-        <div id="imgProfil" [style]="data.electricien.photo != undefined ? 'background-image: url(http://localhost'+data.electricien.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
+        <div *ngIf="data.action == 'ajout'" id="imgProfil" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
+        <div *ngIf="data.action == 'modif'" id="imgProfil" [style]="data.electricien.photo != undefined ? 'background-image: url(http://localhost'+data.electricien.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
         <input id="btnPhoto" type="button" (click)="readURL()" value="Photo" >
     </div>
     <div class="champ_input">
@@ -56,6 +57,28 @@
     <div *ngIf="submitted && f['telephone'].errors" class="errorDiv">
         <span *ngIf="f['telephone'].errors!['minlength']">Telephone est inferieur à 0</span>
         <span *ngIf="f['telephone'].errors!['required']">Telephone requit</span>
+    </div>
+    <div class="coordonneeDiv">
+        <div class="coorSubDiv">
+            <div class="champ_input">
+                <input [ngStyle]="{'border': submitted && f['latitude'].errors ? '1px solid red' : null}" type="tel"  class="input_focus" id="latitude" placeholder="" formControlName="latitude" >
+                <label for="latitude" class="label">Latitude</label>
+            </div>
+            <div *ngIf="submitted && f['latitude'].errors" class="errorDiv">
+                <span *ngIf="f['latitude'].errors!['minlength']">Telephone est inferieur à 0</span>
+                <span *ngIf="f['latitude'].errors!['required']">Latitude requit</span>
+            </div>
+        </div>
+        <div class="coorSubDiv">
+            <div class="champ_input">
+                <input [ngStyle]="{'border': submitted && f['longitude'].errors ? '1px solid red' : null}" type="tel"  class="input_focus" id="longitude" placeholder="" formControlName="longitude" >
+                <label for="longitude" class="label">Longitude</label>
+            </div>
+            <div *ngIf="submitted && f['longitude'].errors" class="errorDiv">
+                <span *ngIf="f['longitude'].errors!['minlength']">Telephone est inferieur à 0</span>
+                <span *ngIf="f['longitude'].errors!['required']">Longitude requit</span>
+            </div>
+        </div>
     </div>
     <input id="file" type="file" formControlName="file">
     <div class="btnGroup">

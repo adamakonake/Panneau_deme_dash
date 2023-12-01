@@ -24,7 +24,7 @@
         </div>
         <div *ngIf="currentAdmin">
             <div class="headerBarDiv sortAndAdd" *ngIf="currentAdmin.superAdmin == true">
-                <div class="searchInputAndIconDiv sortAndAddOutlineDiv" (click)="openDialog('ajout')">
+                <div class="searchInputAndIconDiv sortAndAddOutlineDiv" (click)="openDialog('ajout',undefined)">
                     <div class="searchIconDiv sortAndAddIconDiv">
                         <img class="searchIcon" src="../../../assets/plusIcon.png" alt="" srcset="">
                     </div>

@@ -29,6 +29,8 @@ export class ElectricienDialogComponent {
     experience : [(this.data.electricien != undefined) ? this.data.electricien.experience : '',[Validators.required,Validators.min(0)]],
     email : [(this.data.electricien != undefined) ? this.data.electricien.email : '',[Validators.required,Validators.email]],
     telephone : [(this.data.electricien != undefined) ? this.data.electricien.telephone : '',[Validators.required,Validators.minLength(8)]],
+    latitude : [(this.data.electricien != undefined) ? this.data.electricien.latitude : '',[Validators.required,Validators.min(-90),Validators.max(90)]],
+    longitude : [(this.data.electricien != undefined) ? this.data.electricien.longitude : '',[Validators.required,Validators.min(-90),Validators.max(90)]],
     file : [,(this.data.action == "ajout") ? Validators.required : null],
   })
 
@@ -65,6 +67,8 @@ export class ElectricienDialogComponent {
     electricien.experience = +this.formElectricien.value["experience"]!;
     electricien.email = this.formElectricien.value["email"]!;
     electricien.telephone = this.formElectricien.value["telephone"]!;
+    electricien.latitude = this.formElectricien.value["latitude"]!;
+    electricien.longitude = this.formElectricien.value["longitude"]!;
     console.log(electricien);
     if(this.data.action == "modif"){
       const formData: FormData = new FormData();

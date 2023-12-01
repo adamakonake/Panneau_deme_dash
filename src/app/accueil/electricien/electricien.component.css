@@ -1,12 +1,17 @@
 main{
     width: 100%;
     padding: 30px;
+    position: relative;
 }
 header{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 76px;
+    height: 100px;
+    background-color: #FFFFFF;
 }
 .headerBarDiv{
     width: 200px;

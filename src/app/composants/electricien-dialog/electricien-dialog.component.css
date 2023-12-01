@@ -124,6 +124,16 @@
     cursor: pointer;
 }
 
+.coordonneeDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.coorSubDiv{
+    width: 48%;
+}
+
 /* -------------------------------------------------suppresion style----------------------------------- */
 main{
     padding: 15px;
