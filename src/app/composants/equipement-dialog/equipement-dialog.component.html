@@ -11,12 +11,13 @@
 <!----------------------------------------- Formulaire d'ajout et de modificatio ------------------------------------->
 
 <form *ngIf="data.action != 'supp'" class="equipementForm" [formGroup]="formEquipement" (ngSubmit)="onSubmit()" >
+    <p>Ajout equipement</p>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['nom'].errors ? '1px solid red' : null}" type="text"  class="input_focus" id="nom" placeholder="" formControlName="nom">
         <label for="nom" class="label">Nom</label>
     </div>
     <div *ngIf="submitted && f['nom'].errors" class="errorDiv">
-        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requit</span>
+        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requis</span>
         <span *ngIf="submitted && f['nom'].errors!['minlength']">Nom inférieur à quatre(4) caractères</span>
         <span *ngIf="submitted && f['nom'].errors!['incorrect']">Nom existe déjà</span>
     </div>
@@ -25,7 +26,7 @@
         <label for="marque" class="label">Marque</label>
     </div>
     <div *ngIf="submitted && f['marque'].errors" class="errorDiv">
-        <span *ngIf="submitted && f['marque'].errors!['required']">Email requit</span>
+        <span *ngIf="submitted && f['marque'].errors!['required']">Marque requis</span>
         <span *ngIf="submitted && f['marque'].errors!['minlength']">Marque inférieur à quatre(4) caractères</span>
     </div>
     <div class="champ_input">
@@ -34,7 +35,7 @@
     </div>
     <div *ngIf="submitted && f['puissance'].errors" class="errorDiv">
         <span *ngIf="f['puissance'].errors!['minlength']">Puissance est inferieur à 0</span>
-        <span *ngIf="f['puissance'].errors!['required']">Puissance requit</span>
+        <span *ngIf="f['puissance'].errors!['required']">Puissance requis</span>
     </div>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['tension'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="tension" placeholder="" formControlName="tension" >
@@ -42,7 +43,7 @@
     </div>
     <div *ngIf="submitted && f['tension'].errors" class="errorDiv">
         <span *ngIf="f['tension'].errors!['minlength']">Tension est inferieur à 0</span>
-        <span *ngIf="f['tension'].errors!['required']">Tension requit</span>
+        <span *ngIf="f['tension'].errors!['required']">Tension requis</span>
     </div>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['intensite'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="intensite" placeholder="" formControlName="intensite" >
@@ -50,7 +51,7 @@
     </div>
     <div *ngIf="submitted && f['intensite'].errors" class="errorDiv">
         <span *ngIf="f['intensite'].errors!['minlength']">Intensite est inferieur à 0</span>
-        <span *ngIf="f['intensite'].errors!['required']">Intensite requit</span>
+        <span *ngIf="f['intensite'].errors!['required']">Intensite requis</span>
     </div>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['prix'].errors ? '1px solid red' : null}" type="number"  class="input_focus" id="prix" placeholder="" formControlName="prix" >
@@ -58,7 +59,7 @@
     </div>
     <div *ngIf="submitted && f['prix'].errors" class="errorDiv">
         <span *ngIf="f['prix'].errors!['minlength']">Prix est inferieur à 0</span>
-        <span *ngIf="f['prix'].errors!['required']">Prix requit</span>
+        <span *ngIf="f['prix'].errors!['required']">Prix requis</span>
     </div>
     <div class="slectType" *ngIf="types.length > 0">
         <label class="typeLabel" for="type">Type : </label>

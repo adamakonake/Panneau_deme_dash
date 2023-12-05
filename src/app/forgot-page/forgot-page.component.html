@@ -30,9 +30,9 @@
                     <label for="email" class="label">Email</label>
                 </div>
                 <div *ngIf="submitted && f['email'].errors" class="errorDiv">
-                    <span *ngIf="submitted && f['email'].errors!['required']">Email requit</span>
-                    <span *ngIf="submitted && f['email'].errors!['email']">Email non valid</span>
-                    <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrectt</span>
+                    <span *ngIf="submitted && f['email'].errors!['required']">Email requis</span>
+                    <span *ngIf="submitted && f['email'].errors!['email']">Email non valide</span>
+                    <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrecte</span>
                 </div>
                 <input class="btnSend" type="submit" value="Envoyer code">
             </form>

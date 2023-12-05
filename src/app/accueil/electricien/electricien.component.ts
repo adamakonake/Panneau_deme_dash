@@ -8,6 +8,7 @@ import { ElectricienDialogComponent } from 'src/app/composants/electricien-dialo
 import { ElectricienService } from 'src/app/services/electricien.service';
 import { Electricien } from 'src/app/model/electricien';
 import { AccueilService } from 'src/app/services/accueil.service';
+import { PageEvent } from '@angular/material/paginator';
 
 defineComponents(IgcRatingComponent);
 
@@ -25,6 +26,9 @@ export class ElectricienComponent implements OnInit {
   searchValue : string = "";
   sortValue : string = "all";
 
+  private start : number = 0;
+  private end : number = 12;
+
   constructor(public dialog: MatDialog, private electricienService : ElectricienService, private accueilService : AccueilService){}
 
   ngOnInit(): void {
@@ -35,7 +39,7 @@ export class ElectricienComponent implements OnInit {
   getElectriciens(){
     this.electricienService.getElectriciens().subscribe((result : any)=>{
       this.electriciens = result["data"]["electriciens"];
-      this.searchResult = result["data"]["electriciens"];
+      this.searchResult = this.electriciens.slice(0,12);
       this.notes = result["data"]["notes"];
       this.nmbreNote = result["data"]["nmbreNote"];
     })
@@ -72,6 +76,21 @@ export class ElectricienComponent implements OnInit {
     }else{
       this.searchResult = this.electriciens.filter((ele) => ele.active == false);
     }
+  }
+
+  public getServerData(event?:PageEvent){
+    
+    if(event?.pageIndex! > event?.previousPageIndex!){
+      this.start = this.start+12;
+      this.end = this.end+12;
+      this.searchResult = this.electriciens.slice(this.start,this.end)
+    }else{
+      this.start = this.start-12;
+      this.end = this.end-12;
+      this.searchResult = this.electriciens.slice(this.start,this.end)
+    }
+
+    return event;
   }
 
 }

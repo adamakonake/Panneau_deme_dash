@@ -34,7 +34,7 @@
         </div>
     </header>
     <div class="listAdministrateur">
-       <div class="card" *ngFor="let admin of searchResult">
+       <div class="card" *ngFor="let admin of searchResult" [ngStyle]="{'display' : admin.idAdministrateur == currentAdmin.idAdministrateur ? 'none' : null}">
             <div class="profilDiv">
                 <div class="profil" style="background-image: url(http://localhost{{admin.photo}});"></div>
             </div>
@@ -50,4 +50,9 @@
             </div>
        </div>
     </div>
+    <mat-paginator *ngIf="searchResult" [length]="administrateurs.length"
+              [pageSize]="12"
+              aria-label="Select page"
+              (page)="getServerData($event)">
+    </mat-paginator>
 </main>

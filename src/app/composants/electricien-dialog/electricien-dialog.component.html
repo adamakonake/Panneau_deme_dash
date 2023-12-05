@@ -12,6 +12,7 @@
 <!----------------------------------------- Formulaire d'ajout et de modificatio ------------------------------------->
 
 <form *ngIf="data.action != 'disable'" class="equipementForm" [formGroup]="formElectricien" (ngSubmit)="onSubmit()" >
+    <p>Ajout électricien</p>
     <div class="imageDiv">
         <div *ngIf="data.action == 'ajout'" id="imgProfil" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
         <div *ngIf="data.action == 'modif'" id="imgProfil" [style]="data.electricien.photo != undefined ? 'background-image: url(http://localhost'+data.electricien.photo+');' : 'background-image: url(../../../assets/banner_img.jpg);'" [ngStyle]="{'border': submitted && f['file'].errors ? '1px solid red' : null}"></div>
@@ -22,7 +23,7 @@
         <label for="nom" class="label">Nom</label>
     </div>
     <div *ngIf="submitted && f['nom'].errors" class="errorDiv">
-        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requit</span>
+        <span *ngIf="submitted && f['nom'].errors!['required']">Nom requis</span>
         <span *ngIf="submitted && f['nom'].errors!['minlength']">Nom inférieur à quatre(4) caractères</span>
     </div>
     <div class="champ_input">
@@ -30,7 +31,7 @@
         <label for="prenom" class="label">Prenom</label>
     </div>
     <div *ngIf="submitted && f['prenom'].errors" class="errorDiv">
-        <span *ngIf="submitted && f['prenom'].errors!['required']">Prenom requit</span>
+        <span *ngIf="submitted && f['prenom'].errors!['required']">Prenom requis</span>
         <span *ngIf="submitted && f['prenom'].errors!['minlength']">Prenom inférieur à quatre(4) caractères</span>
     </div>
     <div class="champ_input">
@@ -39,16 +40,16 @@
     </div>
     <div *ngIf="submitted && f['experience'].errors" class="errorDiv">
         <span *ngIf="f['experience'].errors!['minlength']">Puissance est inferieur à 0</span>
-        <span *ngIf="f['experience'].errors!['required']">Puissance requit</span>
+        <span *ngIf="f['experience'].errors!['required']">Puissance requis</span>
     </div>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['email'].errors ? '1px solid red' : null}" type="email"  class="input_focus" id="email" placeholder="" formControlName="email">
         <label for="email" class="label">Email</label>
     </div>
     <div *ngIf="submitted && f['email'].errors" class="errorDiv">
-        <span *ngIf="submitted && f['email'].errors!['required']">Email requit</span>
-        <span *ngIf="submitted && f['email'].errors!['email']">Email non valid</span>
-        <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrectt</span>
+        <span *ngIf="submitted && f['email'].errors!['required']">Email requis</span>
+        <span *ngIf="submitted && f['email'].errors!['email']">Email non valide</span>
+        <span *ngIf="submitted && f['email'].errors!['incorrect']">Email incorrecte</span>
     </div>
     <div class="champ_input">
         <input [ngStyle]="{'border': submitted && f['telephone'].errors ? '1px solid red' : null}" type="tel"  class="input_focus" id="telephone" placeholder="" formControlName="telephone" >
@@ -56,7 +57,7 @@
     </div>
     <div *ngIf="submitted && f['telephone'].errors" class="errorDiv">
         <span *ngIf="f['telephone'].errors!['minlength']">Telephone est inferieur à 0</span>
-        <span *ngIf="f['telephone'].errors!['required']">Telephone requit</span>
+        <span *ngIf="f['telephone'].errors!['required']">Telephone requis</span>
     </div>
     <div class="coordonneeDiv">
         <div class="coorSubDiv">
@@ -66,7 +67,7 @@
             </div>
             <div *ngIf="submitted && f['latitude'].errors" class="errorDiv">
                 <span *ngIf="f['latitude'].errors!['minlength']">Telephone est inferieur à 0</span>
-                <span *ngIf="f['latitude'].errors!['required']">Latitude requit</span>
+                <span *ngIf="f['latitude'].errors!['required']">Latitude requis</span>
             </div>
         </div>
         <div class="coorSubDiv">
@@ -76,7 +77,7 @@
             </div>
             <div *ngIf="submitted && f['longitude'].errors" class="errorDiv">
                 <span *ngIf="f['longitude'].errors!['minlength']">Telephone est inferieur à 0</span>
-                <span *ngIf="f['longitude'].errors!['required']">Longitude requit</span>
+                <span *ngIf="f['longitude'].errors!['required']">Longitude requis</span>
             </div>
         </div>
     </div>

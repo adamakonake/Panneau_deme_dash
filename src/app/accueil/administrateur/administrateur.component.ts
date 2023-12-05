@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { EncryptStorage } from 'encrypt-storage';
 import { AdministrateurDialogComponent } from 'src/app/composants/administrateur-dialog/administrateur-dialog.component';
 import { Admin } from 'src/app/model/admin';
@@ -26,6 +27,9 @@ export class AdministrateurComponent implements OnInit {
   sortValue : string = "all";
   currentAdmin! : Admin;
 
+  private start : number = 0;
+  private end : number = 12;
+
   constructor(public dialog: MatDialog, private adminService : AdminService, private accueilService : AccueilService){}
   
   ngOnInit(): void {
@@ -37,7 +41,7 @@ export class AdministrateurComponent implements OnInit {
   getAdministrateurs(){
     this.adminService.getAdmins().subscribe((result : any)=>{
       this.administrateurs = result["data"];
-      this.searchResult = result["data"];
+      this.searchResult = this.administrateurs.slice(0,12);
     })
   }
 
@@ -73,6 +77,21 @@ export class AdministrateurComponent implements OnInit {
       case "admin" : this.searchResult = this.administrateurs.filter((ele) => ele.superAdmin == false); break;
       case "nonAdmin" : this.searchResult = this.administrateurs.filter((ele) => ele.superAdmin == true); break;
     }
+  }
+
+  public getServerData(event?:PageEvent){
+    
+    if(event?.pageIndex! > event?.previousPageIndex!){
+      this.start = this.start+12;
+      this.end = this.end+12;
+      this.searchResult = this.administrateurs.slice(this.start,this.end)
+    }else{
+      this.start = this.start-12;
+      this.end = this.end-12;
+      this.searchResult = this.administrateurs.slice(this.start,this.end)
+    }
+
+    return event;
   }
 
 }

@@ -28,8 +28,8 @@
                     <label for="code" class="label">Code de verification</label>
                 </div>
                 <div *ngIf="submitted && f['code'].errors" class="errorDiv">
-                    <span *ngIf="submitted && f['code'].errors!['required']">Code requit</span>
-                    <span *ngIf="submitted && f['code'].errors!['incorrect']">Code incorrectt</span>
+                    <span *ngIf="submitted && f['code'].errors!['required']">Code requis</span>
+                    <span *ngIf="submitted && f['code'].errors!['incorrect']">Code incorrect</span>
                 </div>
                 <p class="forgotText" (click)="resendCode()" >Code non reçu ?</p>
                 <input class="btnVerifier" type="submit" value="Verifier">

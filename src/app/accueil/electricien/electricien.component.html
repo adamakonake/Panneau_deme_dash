@@ -50,4 +50,9 @@
             </div>
         </div>
     </div>
+    <mat-paginator *ngIf="searchResult" [length]="electriciens.length"
+              [pageSize]="12"
+              aria-label="Select page"
+              (page)="getServerData($event)">
+    </mat-paginator>
 </main>

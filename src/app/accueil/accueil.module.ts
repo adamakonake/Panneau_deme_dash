@@ -20,6 +20,7 @@ import { AdministrateurComponent } from './administrateur/administrateur.compone
 import { AdministrateurModule } from './administrateur/administrateur.module';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { UtilisateurModule } from './utilisateur/utilisateur.module';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { UtilisateurModule } from './utilisateur/utilisateur.module';
     ElectricienModule,
     IgcFormsModule,
     AdministrateurModule,
-    UtilisateurModule
+    UtilisateurModule,
+    MatPaginatorModule
   ]
 })
 export class AccueilModule { }
